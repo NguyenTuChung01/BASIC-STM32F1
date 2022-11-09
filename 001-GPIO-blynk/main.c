@@ -23,7 +23,7 @@ int main(void)
 
 void delay()
 {
-	volatile uint32_t i = 100000;
+	volatile uint32_t i = 1000000;
 	while(i)
 	{
 		i--;
