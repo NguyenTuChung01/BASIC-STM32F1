@@ -1,7 +1,6 @@
 #include "stm32f10x.h"                  // Device header
-
+#include "stdint.h"
 void delay(void);
-
 
 int main(void)
 {
@@ -12,6 +11,7 @@ int main(void)
 	GPIOC->CRH &= ~(0xF << 20);		/*Reset pin PC13*/
 	GPIOC->CRH |= (0x3 << 20); 		/*Set output push-pull*/ 
 	GPIOC->ODR |= (0x1 << 13);		/**/
+	
 	while(1)
 	{
 		GPIOC->ODR &= ~(0x1 << 13);
@@ -19,12 +19,14 @@ int main(void)
 		GPIOC->ODR |= (0x1 << 13);
 		delay();
 	}
-	return 0;
 }
 
 void delay()
 {
-	uint32_t i;
-	for(i = 0 ; i < 100000 ; i++);
+	volatile uint32_t i = 100000;
+	while(i)
+	{
+		i--;
+	}
 }
 
